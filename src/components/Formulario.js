@@ -10,8 +10,12 @@ import {
 } from 'react-native';
 
 const Formulario = ({modalVisible}) => {
-  const [paciente, setPaciente] = useState('')
-  
+  const [paciente, setPaciente] = useState('');
+  const [propietario, setPropietario] = useState('');
+  const [email, setEmail] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [sintomas, setSintomas] = useState('');
+
   return (
     <Modal animationType="slide" visible={modalVisible}>
       <SafeAreaView style={styles.contenido}>
@@ -25,6 +29,8 @@ const Formulario = ({modalVisible}) => {
               style={styles.input}
               placeholder="Nombre paciente"
               placeholderTextColor={'#666'}
+              value={paciente}
+              onChangeText={setPaciente}
             />
           </View>
           <View style={styles.campo}>
@@ -33,6 +39,8 @@ const Formulario = ({modalVisible}) => {
               style={styles.input}
               placeholder="Nombre propietario"
               placeholderTextColor={'#666'}
+              value={propietario}
+              onChangeText={setPropietario}
             />
           </View>
           <View style={styles.campo}>
@@ -42,6 +50,8 @@ const Formulario = ({modalVisible}) => {
               style={styles.input}
               placeholder="email propietario"
               placeholderTextColor={'#666'}
+              value={email}
+              onChangeText={setEmail}
             />
           </View>
           <View style={styles.campo}>
@@ -51,14 +61,20 @@ const Formulario = ({modalVisible}) => {
               style={styles.input}
               placeholder="Teléfono propietario"
               placeholderTextColor={'#666'}
+              value={telefono}
+              onChangeText={setTelefono}
             />
           </View>
           <View style={styles.campo}>
             <Text style={styles.label}>Sintomas</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, styles.sintomasInput]}
               placeholder="Síntomas"
               placeholderTextColor={'#666'}
+              value={sintomas}
+              onChangeText={setSintomas}
+              multiline={true}
+              numberOfLines={4}
             />
           </View>
         </ScrollView>
@@ -98,5 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 10,
   },
+  sintomasInput:{
+  height:100}
 });
 export default Formulario;
