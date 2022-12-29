@@ -8,16 +8,46 @@ import {
   View,
   ScrollView,
   Pressable,
+  Alert,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
-const Formulario = ({modalVisible, setModalVisible}) => {
+const Formulario = ({
+  modalVisible,
+  setModalVisible,
+  pacientes,
+  setPacientes,
+}) => {
   const [paciente, setPaciente] = useState('');
   const [propietario, setPropietario] = useState('');
   const [fecha, setFecha] = useState(new Date());
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [sintomas, setSintomas] = useState('');
+
+  const handleCita = () => {
+    /* if ([paciente, propietario, fecha, email, sintomas].includes('')) {
+      Alert.alert('Error', 'Todos los campos son obligatorios');
+      return;
+    } */
+    const nuevoPaciente = {
+      id:Date.now(),
+      paciente,
+      propietario,
+      fecha,
+      email,
+      telefono,
+      sintomas,
+    };
+    setPacientes([...pacientes, nuevoPaciente]);
+    setModalVisible(false);
+    setPaciente('');
+    setPropietario('');
+    setEmail('');
+    setFecha(new Date());
+    setTelefono('');
+    setSintomas('');
+  };
 
   return (
     <Modal animationType="slide" visible={modalVisible}>
@@ -55,7 +85,7 @@ const Formulario = ({modalVisible, setModalVisible}) => {
           <View style={styles.campo}>
             <Text style={styles.label}>Fecha Alta</Text>
             <View style={styles.fechaContenedor}>
-              <DatePicker date={fecha} onDateChange={date => setFecha(date)} />
+              <DatePicker mode={'date'} date={fecha} onDateChange={date => setFecha(date)} />
             </View>
           </View>
           <View style={styles.campo}>
@@ -92,9 +122,7 @@ const Formulario = ({modalVisible, setModalVisible}) => {
               numberOfLines={4}
             />
           </View>
-          <Pressable
-            style={styles.btnNuevaCita}
-            onLongPress={() => setModalVisible(false)}>
+          <Pressable style={styles.btnNuevaCita} onPress={handleCita}>
             <Text style={styles.btnNuevaCitaTexto}> Agregar Paciente</Text>
           </Pressable>
         </ScrollView>

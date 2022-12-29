@@ -1,21 +1,47 @@
 import React, {useState} from 'react';
-import {Text, SafeAreaView, StyleSheet, Pressable} from 'react-native';
+import {
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  Pressable,
+  FlatList,
+} from 'react-native';
 import Formulario from './src/components/Formulario';
+import Paciente from './src/components/Paciente';
 
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [pacientes, setPacientes] = useState([]);
 
-  
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titulo}>
         Administrador de Citas{' '}
         <Text style={styles.tituloBold}>Veterinaria</Text>
       </Text>
-      <Pressable style={styles.btnNuevaCita} onPress={()=>setModalVisible(true)}>
+      <Pressable
+        style={styles.btnNuevaCita}
+        onPress={() => setModalVisible(true)}>
         <Text style={styles.btnTextNuevaCita}>Nueva Cita</Text>
       </Pressable>
-      <Formulario modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+      {pacientes.length === 0 ? (
+        <Text style={styles.noPacientes}>No hay pacientes</Text>
+      ) : (
+        <FlatList
+          style={styles.listado}
+          data={pacientes}
+          keyExtractor={item => item.id}
+          renderItem={item => {
+            return <Paciente item={item} />;
+          }}
+        />
+      )}
+      <Formulario
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        pacientes={pacientes}
+        setPacientes={setPacientes}
+      />
     </SafeAreaView>
   );
 };
@@ -44,6 +70,16 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     color: '#fff',
     fontWeight: 'bold',
+  },
+  noPacientes: {
+    marginTop: 40,
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: 24,
+  },
+  listado: {
+    marginTop: 50,
+    marginHorizontal: 30,
   },
 });
 
