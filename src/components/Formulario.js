@@ -7,10 +7,11 @@ import {
   TextInput,
   View,
   ScrollView,
+  Pressable,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
-const Formulario = ({modalVisible}) => {
+const Formulario = ({modalVisible, setModalVisible}) => {
   const [paciente, setPaciente] = useState('');
   const [propietario, setPropietario] = useState('');
   const [fecha, setFecha] = useState(new Date());
@@ -25,6 +26,12 @@ const Formulario = ({modalVisible}) => {
           <Text style={styles.titulo}>
             Nueva <Text style={styles.tituloBold}>Cita</Text>
           </Text>
+
+          <Pressable
+            style={styles.btnCancelar}
+            onLongPress={() => setModalVisible(false)}>
+            <Text style={styles.btnCancelarTexto}> X Cancelar</Text>
+          </Pressable>
           <View style={styles.campo}>
             <Text style={styles.label}>Nombre Paciente</Text>
             <TextInput
@@ -85,6 +92,11 @@ const Formulario = ({modalVisible}) => {
               numberOfLines={4}
             />
           </View>
+          <Pressable
+            style={styles.btnNuevaCita}
+            onLongPress={() => setModalVisible(false)}>
+            <Text style={styles.btnNuevaCitaTexto}> Agregar Paciente</Text>
+          </Pressable>
         </ScrollView>
       </SafeAreaView>
     </Modal>
@@ -128,6 +140,34 @@ const styles = StyleSheet.create({
   fechaContenedor: {
     backgroundColor: '#fff',
     borderRadius: 10,
+  },
+  btnCancelar: {
+    marginVertical: 30,
+    borderRadius: 10,
+    backgroundColor: '#5827a4',
+    marginHorizontal: 30,
+    padding: 20,
+  },
+  btnCancelarTexto: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: '900',
+    fontSize: 16,
+    textTransform: 'uppercase',
+  },
+  btnNuevaCita: {
+    marginVertical: 50,
+    backgroundColor: '#f59e0b',
+    paddingVertical: 15,
+    marginHorizontal: 30,
+    borderRadius: 10,
+  },
+  btnNuevaCitaTexto: {
+    textAlign: 'center',
+    color: '#5827a4',
+    textTransform: 'uppercase',
+    fontWeight: '900',
+    fontSize: 16,
   },
 });
 export default Formulario;
