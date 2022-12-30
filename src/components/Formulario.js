@@ -26,12 +26,12 @@ const Formulario = ({
   const [sintomas, setSintomas] = useState('');
 
   const handleCita = () => {
-    /* if ([paciente, propietario, fecha, email, sintomas].includes('')) {
+    if ([paciente, propietario, fecha, email, sintomas].includes('')) {
       Alert.alert('Error', 'Todos los campos son obligatorios');
       return;
-    } */
+    }
     const nuevoPaciente = {
-      id:Date.now(),
+      id: Date.now(),
       paciente,
       propietario,
       fecha,
@@ -85,7 +85,11 @@ const Formulario = ({
           <View style={styles.campo}>
             <Text style={styles.label}>Fecha Alta</Text>
             <View style={styles.fechaContenedor}>
-              <DatePicker mode={'date'} date={fecha} onDateChange={date => setFecha(date)} />
+              <DatePicker
+                mode={'date'}
+                date={fecha}
+                onDateChange={date => setFecha(date)}
+              />
             </View>
           </View>
           <View style={styles.campo}>

@@ -1,9 +1,10 @@
 import React from 'react';
 import {Text, View, StyleSheet, Pressable} from 'react-native';
 
-const Paciente = ({item}) => {
-  const {paciente, fecha} = item.item;
-  console.log(paciente, fecha);
+const Paciente = ({item, setModalVisible, pacienteEditar}) => {
+  const {paciente, fecha,id} = item.item;
+  console.log(id);
+ 
 
   const formatearFecha = fecha => {
     const nuevaFecha = new Date(fecha);
@@ -24,7 +25,12 @@ const Paciente = ({item}) => {
       <Text style={styles.texto}>{paciente}</Text>
       <Text style={styles.fecha}>{formatearFecha(fecha)}</Text>
       <View style={styles.contenedorBotones}>
-        <Pressable style={[styles.btn, styles.btnEditar]}>
+        <Pressable
+          style={[styles.btn, styles.btnEditar]}
+          onLongPress={() => {
+            setModalVisible(true);
+            pacienteEditar(id);
+          }}>
           <Text style={styles.btnTexto}>Editar</Text>
         </Pressable>
         <Pressable style={[styles.btn, styles.btnEliminar]}>
@@ -64,8 +70,8 @@ const styles = StyleSheet.create({
   },
   btn: {
     paddingVertical: 5,
-    paddingHorizontal:20,
-    borderRadius:5
+    paddingHorizontal: 20,
+    borderRadius: 5,
   },
   btnEditar: {
     backgroundColor: '#f59e0b',
@@ -74,7 +80,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ef4444',
   },
   btnTexto: {
-textTransform:'uppercase', fontSize:12, color:'#fff', fontWeight:'700'},
+    textTransform: 'uppercase',
+    fontSize: 12,
+    color: '#fff',
+    fontWeight: '700',
+  },
 });
 
 export default Paciente;

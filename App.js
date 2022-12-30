@@ -12,6 +12,13 @@ import Paciente from './src/components/Paciente';
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [pacientes, setPacientes] = useState([]);
+  const [paciente, setPaciente] = useState({})
+
+  const pacienteEditar = id => {
+    
+    const pacienteEditar = pacientes.filter(()=>paciente.id===id)
+    console.log(pacienteEditar);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -21,7 +28,7 @@ const App = () => {
       </Text>
       <Pressable
         style={styles.btnNuevaCita}
-        onPress={() => setModalVisible(true)}>
+        onPress={() => setModalVisible(!modalVisible)}>
         <Text style={styles.btnTextNuevaCita}>Nueva Cita</Text>
       </Pressable>
       {pacientes.length === 0 ? (
@@ -32,7 +39,13 @@ const App = () => {
           data={pacientes}
           keyExtractor={item => item.id}
           renderItem={item => {
-            return <Paciente item={item} />;
+            return (
+              <Paciente
+                item={item}
+                setModalVisible={setModalVisible}
+                pacienteEditar={pacienteEditar}
+              />
+            );
           }}
         />
       )}
