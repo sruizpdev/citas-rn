@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Modal,
   SafeAreaView,
@@ -17,13 +17,28 @@ const Formulario = ({
   setModalVisible,
   pacientes,
   setPacientes,
+  paciente: pacienteObj,
 }) => {
+  const [id, setId] = useState('');
   const [paciente, setPaciente] = useState('');
   const [propietario, setPropietario] = useState('');
   const [fecha, setFecha] = useState(new Date());
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [sintomas, setSintomas] = useState('');
+  console.log(pacienteObj);
+
+  useEffect(() => {
+    if (Object.keys(pacienteObj).length > 0) {
+      setId(pacienteObj.id);
+      setPaciente(pacienteObj.paciente);
+      setPropietario(pacienteObj.propietario);
+      setFecha(pacienteObj.fecha);
+      setEmail(pacienteObj.email);
+      setTelefono(pacienteObj.telefono);
+      setSintomas(pacienteObj.sintomas);
+    }
+  }, [pacienteObj]);
 
   const handleCita = () => {
     if ([paciente, propietario, fecha, email, sintomas].includes('')) {

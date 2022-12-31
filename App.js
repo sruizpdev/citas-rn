@@ -12,12 +12,11 @@ import Paciente from './src/components/Paciente';
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [pacientes, setPacientes] = useState([]);
-  const [paciente, setPaciente] = useState({})
+  const [paciente, setPaciente] = useState({});
 
   const pacienteEditar = id => {
-    
-    const pacienteEditar = pacientes.filter(()=>paciente.id===id)
-    console.log(pacienteEditar);
+    const pacienteEditar = pacientes.filter(paciente => paciente.id === id);
+    setPaciente(pacienteEditar[0]);
   };
 
   return (
@@ -44,6 +43,7 @@ const App = () => {
                 item={item}
                 setModalVisible={setModalVisible}
                 pacienteEditar={pacienteEditar}
+                
               />
             );
           }}
@@ -54,6 +54,7 @@ const App = () => {
         setModalVisible={setModalVisible}
         pacientes={pacientes}
         setPacientes={setPacientes}
+        paciente={paciente}
       />
     </SafeAreaView>
   );

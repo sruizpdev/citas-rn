@@ -2,9 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, Pressable} from 'react-native';
 
 const Paciente = ({item, setModalVisible, pacienteEditar}) => {
-  const {paciente, fecha,id} = item.item;
-  console.log(id);
- 
+  const {paciente, fecha, id} = item.item;
 
   const formatearFecha = fecha => {
     const nuevaFecha = new Date(fecha);
@@ -15,7 +13,6 @@ const Paciente = ({item, setModalVisible, pacienteEditar}) => {
       month: 'long',
       day: 'numeric',
     };
-
     return nuevaFecha.toLocaleDateString('es-ES', opciones);
   };
 
